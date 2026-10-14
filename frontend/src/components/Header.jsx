@@ -10,7 +10,8 @@ import {
   FileText, 
   Radio, 
   Sparkles,
-  AlertTriangle
+  AlertTriangle,
+  Trophy
 } from 'lucide-react';
 import { audioEngine } from '../services/speechService';
 import { getStoredApiKey } from '../services/geminiService';
@@ -22,6 +23,7 @@ export default function Header({
   onOpenApiKeyModal,
   onOpenCprModal,
   onOpenMistModal,
+  onOpenHackathonModal,
   isMuted,
   onToggleMute,
   casualties
@@ -124,6 +126,16 @@ export default function Header({
 
         {/* Action Controls */}
         <div className="flex items-center space-x-2">
+          {/* H2S Hackathon Presentation & Live Demo */}
+          <button
+            onClick={onOpenHackathonModal}
+            title="Open Hack2Skill Presentation & Demo Guide"
+            className="flex items-center space-x-1.5 px-3 py-1.5 text-xs font-bold rounded-lg bg-gradient-to-r from-amber-500/20 to-red-500/20 border border-amber-500/60 text-amber-300 hover:from-amber-500/30 hover:to-red-500/30 transition shadow-sm animate-pulse"
+          >
+            <Trophy className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden sm:inline">H2S Pitch & Demo</span>
+          </button>
+
           {/* CPR Metronome Quick Launch */}
           <button
             onClick={onOpenCprModal}

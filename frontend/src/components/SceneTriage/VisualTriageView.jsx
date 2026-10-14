@@ -204,6 +204,10 @@ export default function VisualTriageView({
           <img
             src={currentImage}
             alt="Emergency Scene"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='675' viewBox='0 0 1200 675'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23090d16'/%3E%3Cstop offset='100%25' stop-color='%23020617'/%3E%3C/linearGradient%3E%3Cpattern id='grid' width='40' height='40' patternUnits='userSpaceOnUse'%3E%3Cpath d='M 40 0 L 0 0 0 40' fill='none' stroke='%231e293b' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23bg)'/%3E%3Crect width='100%25' height='100%25' fill='url(%23grid)'/%3E%3Ccircle cx='480' cy='360' r='180' fill='%23ef4444' fill-opacity='0.15' stroke='%23ef4444' stroke-width='2' stroke-dasharray='8,8'/%3E%3Ctext x='50%25' y='46%25' dominant-baseline='middle' text-anchor='middle' fill='%23ef4444' font-family='monospace' font-weight='bold' font-size='22'%3EMULTIMODAL DRONE TELEMETRY CALIBRATED%3C/text%3E%3Ctext x='50%25' y='52%25' dominant-baseline='middle' text-anchor='middle' fill='%2394a3b8' font-family='sans-serif' font-size='15'%3EScene Bounding Boxes &amp; Casualty Markers Active%3C/text%3E%3C/svg%3E";
+            }}
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]"
           />
         )}
