@@ -26,7 +26,7 @@ export default function DispatcherCopilot({
     {
       id: 'm1',
       sender: 'ai',
-      text: `Tactical Copilot online for **${scenario.title}**. All 911 audio and computer vision streams calibrated. 4 casualties registered. Requesting authorization to deploy primary ALS units.`,
+      text: `Tactical Copilot online for **${scenario.title}**. All 911 audio and computer vision streams calibrated. ${scenario.casualties.length} casualties registered. Requesting authorization to deploy primary ALS units.`,
       timestamp: '10:42:05'
     }
   ]);
@@ -73,6 +73,12 @@ export default function DispatcherCopilot({
       audioEngine.playRadioChime();
     } catch (err) {
       console.error(err);
+      setMessages(prev => [...prev, {
+        id: String(Date.now() + 1),
+        sender: 'ai',
+        text: 'Copilot is temporarily unavailable. Offline tactical guidance remains active — try a question about dispatch, trauma beds, START triage, CPR, or MIST handover.',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      }]);
     } finally {
       setIsLoading(false);
     }
@@ -165,7 +171,7 @@ export default function DispatcherCopilot({
                     : 'bg-blue-600 text-white shadow-md'
                 }`}
               >
-                {m.text}
+                {m.text.replace(/\*\*/g, '')}
 
                 {isAi && (
                   <div className="mt-2 pt-2 border-t border-slate-800 flex items-center justify-end">

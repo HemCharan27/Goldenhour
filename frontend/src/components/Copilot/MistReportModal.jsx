@@ -17,9 +17,9 @@ export default function MistReportModal({
   casualties,
   hospitals
 }) {
-  if (!isOpen) return null;
-
   const [copied, setCopied] = useState(false);
+
+  if (!isOpen) return null;
 
   const reportText = `=====================================================
 GOLDENHOUR-ZERO | TACTICAL EMERGENCY MIST HANDOVER REPORT

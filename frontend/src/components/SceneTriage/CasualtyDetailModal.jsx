@@ -23,19 +23,28 @@ export default function CasualtyDetailModal({
   onClose,
   onUpdateCasualty
 }) {
-  if (!casualty) return null;
-
   const [appliedInterventions, setAppliedInterventions] = useState([]);
-  const [assignedUnitId, setAssignedUnitId] = useState(casualty.assignedUnitId || '');
-  const [assignedHospitalId, setAssignedHospitalId] = useState(casualty.assignedHospitalId || 'hosp-1');
-  const [countdown, setCountdown] = useState(casualty.goldenHourExpirySeconds || 1800);
+  const [assignedUnitId, setAssignedUnitId] = useState(casualty?.assignedUnitId || '');
+  const [assignedHospitalId, setAssignedHospitalId] = useState(casualty?.assignedHospitalId || 'hosp-1');
+  const [countdown, setCountdown] = useState(casualty?.goldenHourExpirySeconds || 1800);
 
   useEffect(() => {
+    if (!casualty) return;
+    setAppliedInterventions(casualty.completedInterventions || []);
+    setAssignedUnitId(casualty.assignedUnitId || '');
+    setAssignedHospitalId(casualty.assignedHospitalId || 'hosp-1');
+    setCountdown(casualty.goldenHourExpirySeconds || 1800);
+  }, [casualty]);
+
+  useEffect(() => {
+    if (!casualty) return undefined;
     const timer = setInterval(() => {
       setCountdown(prev => (prev > 0 ? prev - 1 : 0));
     }, 1000);
     return () => clearInterval(timer);
-  }, []);
+  }, [casualty]);
+
+  if (!casualty) return null;
 
   const toggleIntervention = (action) => {
     setAppliedInterventions(prev => {

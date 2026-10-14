@@ -13,8 +13,6 @@ import {
 import { audioEngine } from '../../services/speechService';
 
 export default function CprMetronomeModal({ isOpen, onClose }) {
-  if (!isOpen) return null;
-
   const [isRunning, setIsRunning] = useState(false);
   const [bpm, setBpm] = useState(110);
   const [beatPulse, setBeatPulse] = useState(false);
@@ -45,6 +43,8 @@ export default function CprMetronomeModal({ isOpen, onClose }) {
       audioEngine.stopMetronome();
     };
   }, [isRunning, bpm]);
+
+  if (!isOpen) return null;
 
   const handleToggle = () => {
     setIsRunning(prev => !prev);

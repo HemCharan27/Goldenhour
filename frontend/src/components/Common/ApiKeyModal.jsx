@@ -3,10 +3,10 @@ import { X, Key, Sparkles, Check, Trash2, ExternalLink } from 'lucide-react';
 import { getStoredApiKey, saveApiKey } from '../../services/geminiService';
 
 export default function ApiKeyModal({ isOpen, onClose }) {
-  if (!isOpen) return null;
-
   const [key, setKey] = useState(getStoredApiKey());
   const [saved, setSaved] = useState(false);
+
+  if (!isOpen) return null;
 
   const handleSave = () => {
     saveApiKey(key);

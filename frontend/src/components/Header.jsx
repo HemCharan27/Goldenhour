@@ -39,7 +39,7 @@ export default function Header({
     const timer = setInterval(() => {
       setSecondsRemaining(prev => {
         if (prev <= 1) {
-          audioEngine.playEmergencyTone();
+          if (prev === 1) audioEngine.playEmergencyTone();
           return 0;
         }
         return prev - 1;
